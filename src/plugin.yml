@@ -1,0 +1,38 @@
+name: CakeBandit
+main: com.cakebandit.CakeBandit
+author: Matty
+version: 2.0
+description: >
+             CakeBandit Plugin
+
+commands:
+  start:
+    description: Starts the game
+    permission: cakebandit.start
+    permission-message: Permission Denied!
+  bandit:
+    description: Makes the player a bandit
+  pass:
+    description: Gives the chosen player a pass
+    permission: cakebandit.pass
+    permission-message: Permission Denied!
+  passes:
+    description: Shows how many passes the user has
+  extend:
+    description: Extends time
+    permisssion: cakebandit.extend
+    permission-message: Permission Denied!
+  records:
+    description: Shows the player their records
+    
+permissions:
+  cakebandit.start:
+    description: Allows use of start
+    default: op
+  cakebandit.pass:
+    description: Allows use of pass
+    default: op
+  cakebandit.extend:
+    description: Allows use of extend
+    default: op
+  
