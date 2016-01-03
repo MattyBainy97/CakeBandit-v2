@@ -1,6 +1,8 @@
 package com.cakebandit.listeners.player;
 
 import com.cakebandit.CakeBandit;
+import com.cakebandit.GameState;
+import com.cakebandit.handlers.CakeSB;
 import com.cakebandit.listeners.CBListener;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -18,6 +20,12 @@ public class PlayerMove extends CBListener {
     public void onPlayerMove(PlayerMoveEvent m) {
 
         m.getPlayer().setFoodLevel(40);
+        
+        if(GameState.isState(GameState.IN_GAME)){
+            
+            CakeSB.setHealth(m.getPlayer());
+            
+        }
         
         if (m.getTo().getBlock().getRelative(BlockFace.DOWN).getType() == Material.REDSTONE_BLOCK) {
             m.getPlayer().setVelocity(m.getPlayer().getLocation().getDirection().multiply(10));

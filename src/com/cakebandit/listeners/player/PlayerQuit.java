@@ -2,10 +2,13 @@ package com.cakebandit.listeners.player;
 
 import com.cakebandit.GameState;
 import com.cakebandit.CakeBandit;
+import com.cakebandit.handlers.Database;
 import com.cakebandit.handlers.Game;
 import com.cakebandit.handlers.PlayerHandler;
 import com.cakebandit.listeners.CBListener;
+import com.cakebandit.utils.ChatUtilities;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -34,6 +37,7 @@ public class PlayerQuit extends CBListener {
 
             if (q.getPlayer() == PlayerHandler.bandit) {
                 
+                ChatUtilities.broadcast(ChatColor.GOLD + "The " + ChatColor.RED + "BANDIT " + ChatColor.GOLD + "has left the game!");
                 Game.stop();
                 
             }

@@ -71,7 +71,6 @@ public class CakeBandit extends JavaPlugin{
         CakeSB.initializeScoreboard();
         LocationUtilities.initializeSpawns();
         registerListeners();
-        CBItem.setMetas();
         
     }
     

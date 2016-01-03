@@ -102,12 +102,26 @@ public class ChatUtilities {
 
         Database.openConnection();
         if (GameState.isState(GameState.IN_GAME)) {
-            if (PlayerHandler.tested.contains(player.getUniqueId())) {
-                Bukkit.broadcastMessage(GREEN + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);
-            } else if (player == PlayerHandler.bandit && PlayerHandler.isCaught == true) {
-                Bukkit.broadcastMessage(RED + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);
+            if (PlayerHandler.alive.contains(player.getUniqueId())) {
+
+                if (PlayerHandler.tested.contains(player.getUniqueId()) && player != PlayerHandler.getBandit()) {
+                    Bukkit.broadcastMessage(GREEN + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);
+                } else if (player == PlayerHandler.bandit && PlayerHandler.isCaught == true) {
+                    Bukkit.broadcastMessage(RED + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);
+                } else {
+                    Bukkit.broadcastMessage(DARK_AQUA + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);
+                }
+
             } else {
-                Bukkit.broadcastMessage(DARK_AQUA + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);
+                for (Player p : Bukkit.getOnlinePlayers()) {
+
+                    if (PlayerHandler.spec.contains(p.getUniqueId())) {
+
+                        p.sendMessage(DARK_RED + "DEAD " + DARK_AQUA + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);
+
+                    }
+
+                }
             }
         } else {
             Bukkit.broadcastMessage(GRAY + "(" + YELLOW + Database.getCb(player, "points") + GRAY + ") " + DARK_AQUA + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);

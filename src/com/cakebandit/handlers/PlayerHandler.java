@@ -27,6 +27,7 @@ public class PlayerHandler {
         
         alive.add(p.getUniqueId());
         CakeSB.addUntested(p);
+        CakeSB.setHealth(p);
         
     }
     
@@ -34,13 +35,20 @@ public class PlayerHandler {
         
         untested.add(p.getUniqueId());
         CakeSB.addUntested(p);
+        CakeSB.setHealth(p);
         
     }
     
     public static void addTested(Player p) {
         
         tested.add(p.getUniqueId());
-        CakeSB.addTested(p);
+        if(p != PlayerHandler.getBandit()){
+            CakeSB.addTested(p);
+        }else{
+            CakeSB.addBandit(p);
+        }
+        
+        CakeSB.setHealth(p);
         
     }
     

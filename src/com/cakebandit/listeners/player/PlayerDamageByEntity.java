@@ -4,6 +4,7 @@ import com.cakebandit.GameState;
 import com.cakebandit.CakeBandit;
 import com.cakebandit.handlers.Database;
 import com.cakebandit.handlers.CBItem;
+import com.cakebandit.handlers.CakeSB;
 import com.cakebandit.handlers.PlayerHandler;
 import com.cakebandit.listeners.CBListener;
 import com.cakebandit.utils.ChatUtilities;
@@ -30,7 +31,7 @@ public class PlayerDamageByEntity extends CBListener {
     public void onPlayerDamageByEntity(EntityDamageByEntityEvent event) {
 
         if (GameState.isState(GameState.IN_GAME)) {
-
+            
             Entity damaged = event.getEntity();
             Entity damageEntity = event.getDamager();
 

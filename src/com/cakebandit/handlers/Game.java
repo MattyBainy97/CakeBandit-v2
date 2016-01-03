@@ -2,18 +2,12 @@ package com.cakebandit.handlers;
 
 import com.cakebandit.GameState;
 import com.cakebandit.CakeBandit;
-import com.cakebandit.threads.GameTimer;
 import com.cakebandit.threads.ReloadTimer;
 import com.cakebandit.utils.ChatUtilities;
 import com.cakebandit.utils.LocationUtilities;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 
 public class Game {
@@ -37,6 +31,7 @@ public class Game {
                 GameState.setState(GameState.IN_GAME);
                 
                 PlayerHandler.chooseBandit();
+                CBItem.setMetas();
         
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     

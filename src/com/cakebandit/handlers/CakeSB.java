@@ -28,7 +28,7 @@ public class CakeSB {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         gameBoard = manager.getNewScoreboard();
         
-        hearts = gameBoard.registerNewObjective("health", "health");
+        hearts = gameBoard.registerNewObjective("health", "dummy");
         hearts.setDisplaySlot(DisplaySlot.BELOW_NAME);
         hearts.setDisplayName(ChatColor.RED + "❤");
         

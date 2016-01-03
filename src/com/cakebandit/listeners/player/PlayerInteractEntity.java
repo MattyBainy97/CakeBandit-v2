@@ -41,8 +41,8 @@ public class PlayerInteractEntity extends CBListener {
                     Database.updateCbTable(msg, "discovered", Database.getCb(msg, "discovered") + 1);
                     Database.closeConnection();
 
-                    ChatUtilities.oneSubTitle(ChatColor.GOLD + "You revealed the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + " and gained " + ChatColor.GREEN + " 10 " + ChatColor.GOLD + "points!", msg);
-                    ChatUtilities.showTitle(ChatColor.RED + PlayerHandler.bandit.getName() + " was revealed as the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + " by " + ChatColor.GREEN + msg.getName() + ChatColor.GOLD + "!");
+                    ChatUtilities.oneSubTitle(ChatColor.GOLD + "You revealed the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + " and gained" + ChatColor.GREEN + " 10 " + ChatColor.GOLD + "points!", msg);
+                    ChatUtilities.showTitle(ChatColor.RED + PlayerHandler.bandit.getName() + ChatColor.GOLD + " is the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + "!");
                 } else {
                     PlayerHandler.addTested(rightclick);
                     PlayerHandler.removeUntested(rightclick);
@@ -55,7 +55,7 @@ public class PlayerInteractEntity extends CBListener {
                             for (Player everyone : Bukkit.getOnlinePlayers()) {
                                 everyone.hidePlayer(player);
                             }
-                            ChatUtilities.oneSubTitle(ChatColor.GOLD + "You are now a spectator and lost" + ChatColor.RED + " 10 " + ChatColor.GOLD + "points for incorrectly accusing " + ChatColor.GREEN + rightclick.getName() + ChatColor.GOLD + "!", player);
+                            ChatUtilities.oneSubTitle(ChatColor.GOLD + "You lost" + ChatColor.RED + " 10 " + ChatColor.GOLD + "points for accusing " + ChatColor.GREEN + rightclick.getName() + ChatColor.GOLD + "!", player);
                             ChatUtilities.broadcast(ChatColor.GREEN + player.getName() + ChatColor.GOLD + " was removed for incorrectly accusing " + ChatColor.GREEN + rightclick.getName() + ChatColor.GOLD + "!");
                             Database.openConnection();
                             Database.updateCbTable(player, "points", Database.getCb(player, "points") - 10);

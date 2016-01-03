@@ -1,6 +1,7 @@
 package com.cakebandit.listeners.player;
 
 import com.cakebandit.CakeBandit;
+import com.cakebandit.handlers.CakeSB;
 import com.cakebandit.handlers.PlayerHandler;
 import com.cakebandit.listeners.CBListener;
 import org.bukkit.entity.Player;

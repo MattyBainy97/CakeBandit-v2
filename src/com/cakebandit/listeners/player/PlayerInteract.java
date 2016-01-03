@@ -6,11 +6,8 @@ import com.cakebandit.handlers.Game;
 import com.cakebandit.handlers.PlayerHandler;
 import com.cakebandit.listeners.CBListener;
 import com.cakebandit.utils.ChatUtilities;
-import java.util.Random;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -30,7 +27,7 @@ public class PlayerInteract extends CBListener {
 
                 i.getClickedBlock().setType(Material.AIR);
                 PlayerHandler.eatCake();
-                ChatUtilities.oneTitle(ChatColor.GOLD + "You ate a cake! " + ChatColor.RED + PlayerHandler.cakecount + ChatColor.GOLD + " cakes remain!", i.getPlayer());
+                ChatUtilities.oneTitle(ChatColor.RED + "" + PlayerHandler.cakecount + ChatColor.GOLD + " cakes left!", i.getPlayer());
                 ChatUtilities.oneSubTitle(ChatColor.GOLD + "You get" + ChatColor.GREEN + " 5 " + ChatColor.GOLD + "points for eating a cake!", i.getPlayer());
                 
                 Database.openConnection();
@@ -40,6 +37,13 @@ public class PlayerInteract extends CBListener {
 
                 if (PlayerHandler.cakecount == 0) {
 
+                    ChatUtilities.broadcast(ChatColor.GOLD + "The " + ChatColor.RED + "BANDIT " + ChatColor.GOLD + "has eaten all of the cakes!");
+                    ChatUtilities.broadcast(ChatColor.RED + PlayerHandler.bandit.getName() + ChatColor.GOLD + " gains" + ChatColor.GREEN + " 20 " + ChatColor.GOLD + "points for winning!");
+                    Database.openConnection();
+                    Database.updateCbTable(i.getPlayer(), "points", Database.getCb(i.getPlayer(), "points") + 20);
+                    Database.updateCbTable(i.getPlayer(), "wins", Database.getCb(i.getPlayer(), "wins") + 1);
+                    Database.closeConnection();
+                    
                     Game.stop();
 
                 }
