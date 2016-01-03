@@ -11,6 +11,7 @@ public class PlayerHandler {
     public static Player bandit;
     public static int cakecount;
     public static boolean isCaught;
+    public static boolean forceb;
     public static ArrayList<UUID> players = new ArrayList<UUID>();
     public static ArrayList<UUID> alive = new ArrayList<UUID>();
     public static ArrayList<UUID> untested = new ArrayList<UUID>();
@@ -108,6 +109,7 @@ public class PlayerHandler {
         tested.clear();
         spec.clear();
         bandit = null;
+        forceb = false;
         
     }
     

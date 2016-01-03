@@ -28,7 +28,19 @@ public class PlayerQuit extends CBListener {
 
         if (GameState.isState(GameState.IN_LOBBY)) {
 
-            Game.setCanStart(Bukkit.getOnlinePlayers().size() - 1 >= 2);
+            Game.setCanStart(Bukkit.getOnlinePlayers().size() - 1 >= 3);
+            
+            if (q.getPlayer() == PlayerHandler.bandit) {
+                
+                Database.openConnection();
+                Database.updatePasses(p, Database.getPasses(p) + 1);
+                Database.closeConnection();
+                
+                PlayerHandler.bandit = null;
+                PlayerHandler.forceb = false;
+                
+            }
+
 
         } else {
             
@@ -43,6 +55,7 @@ public class PlayerQuit extends CBListener {
             }
 
         }
-
+        
     }
+    
 }

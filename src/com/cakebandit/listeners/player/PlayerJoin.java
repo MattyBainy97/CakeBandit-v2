@@ -105,7 +105,7 @@ public class PlayerJoin extends CBListener {
             p.setExp(0);
             p.removePotionEffect(PotionEffectType.INVISIBILITY);
             p.setGameMode(GameMode.ADVENTURE);
-            Game.setCanStart(Bukkit.getOnlinePlayers().size() >= 2);
+            Game.setCanStart(Bukkit.getOnlinePlayers().size() >= 3);
 
         } else {
             

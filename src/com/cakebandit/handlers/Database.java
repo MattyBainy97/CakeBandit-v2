@@ -178,6 +178,25 @@ public class Database {
         
     }
     
+    public synchronized static void updatePasses(Player player, int newValue){
+        
+        try{
+            
+            PreparedStatement updatePlayer = connection.prepareStatement("UPDATE players SET passes = ? WHERE uuid = ?;");
+            updatePlayer.setInt(1, newValue);
+            updatePlayer.setString(2, player.getUniqueId().toString());
+            updatePlayer.executeUpdate();
+            
+            updatePlayer.close();
+            
+        }catch(Exception e){
+        
+            e.printStackTrace();
+            
+        }
+        
+    }
+    
     public synchronized static int getCb(Player player, String column){
         
         try{
@@ -190,6 +209,31 @@ public class Database {
             int result = resultSet.getInt(column);
             
             getScore.close();
+            
+            return result;
+            
+        }catch(Exception e){
+        
+            e.printStackTrace();
+            
+            return 0;
+            
+        }
+        
+    }
+    
+    public synchronized static int getPasses(Player player){
+        
+        try{
+            
+            PreparedStatement getPasses = connection.prepareStatement("SELECT passes FROM players WHERE uuid = ?;");
+            getPasses.setString(1, player.getUniqueId().toString());
+            ResultSet resultSet = getPasses.executeQuery();
+            resultSet.next();
+           
+            int result = resultSet.getInt("passes");
+            
+            getPasses.close();
             
             return result;
             

@@ -59,6 +59,10 @@ public class PlayerDamageByEntity extends CBListener {
                         
                     }
 
+                } else {
+                    
+                    event.setCancelled(true);
+                    
                 }
 
             } else {

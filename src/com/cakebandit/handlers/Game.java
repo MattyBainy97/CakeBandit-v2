@@ -30,7 +30,9 @@ public class Game {
                 //new Thread(new GameTimer()).start();
                 GameState.setState(GameState.IN_GAME);
                 
-                PlayerHandler.chooseBandit();
+                if(PlayerHandler.forceb == false){
+                    PlayerHandler.chooseBandit();
+                }
                 CBItem.setMetas();
         
                 for (Player p : Bukkit.getOnlinePlayers()) {

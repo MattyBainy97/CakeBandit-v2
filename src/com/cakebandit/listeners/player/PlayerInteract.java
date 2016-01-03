@@ -27,7 +27,11 @@ public class PlayerInteract extends CBListener {
 
                 i.getClickedBlock().setType(Material.AIR);
                 PlayerHandler.eatCake();
-                ChatUtilities.oneTitle(ChatColor.RED + "" + PlayerHandler.cakecount + ChatColor.GOLD + " cakes left!", i.getPlayer());
+                if(PlayerHandler.cakecount != 1){
+                    ChatUtilities.oneTitle(ChatColor.RED + "" + PlayerHandler.cakecount + ChatColor.GOLD + " cakes left!", i.getPlayer());
+                }else{
+                    ChatUtilities.oneTitle(ChatColor.RED + "" + PlayerHandler.cakecount + ChatColor.GOLD + " cake left!", i.getPlayer());
+                }
                 ChatUtilities.oneSubTitle(ChatColor.GOLD + "You get" + ChatColor.GREEN + " 5 " + ChatColor.GOLD + "points for eating a cake!", i.getPlayer());
                 
                 Database.openConnection();
