@@ -57,7 +57,7 @@ public class Game {
                         p.getInventory().addItem(CBItem.stick);
                         ChatUtilities.oneTitle(ChatColor.GOLD + "You are a " + ChatColor.GREEN + "CITIZEN" + ChatColor.GOLD + "!", p);
                         ChatUtilities.onePlayer(ChatColor.GOLD + "You are a " + ChatColor.GREEN + "CITIZEN" + ChatColor.GOLD + "!", p);
-                        ChatUtilities.onePlayer(ChatColor.GOLD + "Your job is to find out who the Bandit is and capture him before they eat all the cakes!", p);
+                        ChatUtilities.onePlayer(ChatColor.GOLD + "Your job is to find out who the Bandit is and capture them before they eat all the cakes!", p);
                         ChatUtilities.onePlayer(ChatColor.GOLD + "Right click on a player with your stick to accuse them!", p);
                         ChatUtilities.onePlayer(ChatColor.GOLD + "If you falsely accuse though, you will be removed from the game!", p);
                     } else {

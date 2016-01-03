@@ -24,6 +24,7 @@ import com.cakebandit.listeners.player.PlayerRespawn;
 import com.cakebandit.listeners.world.BlockBreak;
 import com.cakebandit.listeners.world.BlockPlace;
 import com.cakebandit.listeners.world.ListPing;
+import com.cakebandit.threads.StartCountdown;
 import com.cakebandit.utils.ChatUtilities;
 import com.cakebandit.utils.LocationUtilities;
 import org.bukkit.Bukkit;
@@ -64,7 +65,7 @@ public class CakeBandit extends JavaPlugin {
 
         GameState.setState(GameState.IN_LOBBY);
         Game.setCanStart(false);
-        //new Thread(new StartCountdown()).start();
+        new Thread(new StartCountdown()).start();
         CakeSB.initializeScoreboard();
         LocationUtilities.initializeSpawns();
         registerListeners();
@@ -107,7 +108,7 @@ public class CakeBandit extends JavaPlugin {
 
                 if (GameState.isState(GameState.IN_LOBBY)) {
 
-                    Game.start();
+                    StartCountdown.forceStart = true;
 
                 } else {
 

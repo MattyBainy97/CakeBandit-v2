@@ -16,6 +16,8 @@ public class CBItem {
     public static ItemStack red = new ItemStack(Material.WOOL, 1, (short) 14);
     
     public static ItemStack green = new ItemStack(Material.WOOL, 1, (short) 5);
+    
+    public static ItemStack spec = new ItemStack(Material.COMPASS, 1);
 
     public static void setMetas() {
 
@@ -30,13 +32,7 @@ public class CBItem {
         ItemMeta bstickMeta = (ItemMeta) bstick.getItemMeta();
         bstickMeta.setDisplayName(ChatColor.RESET.RED + "Citizen Beater");
         bstickMeta.addEnchant(Enchantment.KNOCKBACK, 256, true);
-        if (PlayerHandler.players.size() >= 1 && PlayerHandler.players.size() < 5) {
-            bstickMeta.addEnchant(Enchantment.DAMAGE_ALL, 4, true);
-        } else if (PlayerHandler.players.size() >= 5 && PlayerHandler.players.size() < 9) {
-            bstickMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
-        } else if (PlayerHandler.players.size() >= 9) {
-            bstickMeta.addEnchant(Enchantment.DAMAGE_ALL, 6, true);
-        }
+        bstickMeta.addEnchant(Enchantment.DAMAGE_ALL, 4, true);
         bstick.setItemMeta(bstickMeta);
 
         ItemMeta mred = (ItemMeta) red.getItemMeta();
@@ -46,6 +42,10 @@ public class CBItem {
         ItemMeta mgreen = (ItemMeta) green.getItemMeta();
         mgreen.setDisplayName(ChatColor.GREEN + "CITIZEN");
         green.setItemMeta(mgreen);
+        
+        ItemMeta mspec = (ItemMeta) spec.getItemMeta();
+        mspec.setDisplayName(ChatColor.YELLOW + "SPECTATE");
+        spec.setItemMeta(mspec);
 
     }
 }

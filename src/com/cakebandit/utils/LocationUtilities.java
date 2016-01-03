@@ -12,6 +12,8 @@ public class LocationUtilities {
     public static Location[] spawns = new Location[10];
     
     public static Location lobby  = new Location(Bukkit.getWorld("Sword"), 1619, 65, 827); 
+    
+    public static Location head = new Location(Bukkit.getWorld("Sword"), 1619, 65, 837);
 
     public static void initializeSpawns(){
         

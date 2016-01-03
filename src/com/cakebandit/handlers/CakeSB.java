@@ -56,7 +56,7 @@ public class CakeSB {
             cake.setScore(PlayerHandler.cakecount);
             
             untest = points.getScore(Bukkit.getOfflinePlayer(ChatColor.BLUE + "Untested:"));
-            untest.setScore(PlayerHandler.untested.size() - PlayerHandler.tested.size());
+            untest.setScore(PlayerHandler.untested.size());
             
             test = points.getScore(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Tested:"));
             test.setScore(PlayerHandler.tested.size());
@@ -68,7 +68,7 @@ public class CakeSB {
     public static void addUntested(Player player){
         
         untested.addPlayer(player);
-        untest.setScore(PlayerHandler.untested.size() - PlayerHandler.tested.size());
+        untest.setScore(PlayerHandler.untested.size());
         
     }
     
@@ -76,14 +76,14 @@ public class CakeSB {
         
         tested.addPlayer(player);
         test.setScore(PlayerHandler.tested.size());
-        untest.setScore(PlayerHandler.untested.size() - PlayerHandler.tested.size());
+        untest.setScore(PlayerHandler.untested.size());
         
     }
     
     public static void addBandit(Player player){
         
         bandit.addPlayer(player);
-        untest.setScore(PlayerHandler.untested.size() - PlayerHandler.tested.size());
+        untest.setScore(PlayerHandler.untested.size());
         test.setScore(PlayerHandler.tested.size());
         
     }

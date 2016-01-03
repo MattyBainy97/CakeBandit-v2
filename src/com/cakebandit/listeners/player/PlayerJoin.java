@@ -2,7 +2,6 @@ package com.cakebandit.listeners.player;
 
 import com.cakebandit.CakeBandit;
 import com.cakebandit.GameState;
-import com.cakebandit.GameState;
 import com.cakebandit.handlers.Database;
 import com.cakebandit.handlers.Game;
 import com.cakebandit.handlers.CakeSB;
@@ -105,7 +104,7 @@ public class PlayerJoin extends CBListener {
             p.setExp(0);
             p.removePotionEffect(PotionEffectType.INVISIBILITY);
             p.setGameMode(GameMode.ADVENTURE);
-            Game.setCanStart(Bukkit.getOnlinePlayers().size() >= 3);
+            Game.setCanStart(Bukkit.getOnlinePlayers().size() >= 2);
 
         } else {
             
@@ -122,6 +121,7 @@ public class PlayerJoin extends CBListener {
             p.setAllowFlight(true);
             p.setFlying(true);
             p.getInventory().clear();
+            p.getInventory().addItem(CBItem.spec);
             p.setExp(0);
             p.teleport(LocationUtilities.spawns[0]);
             CakeSB.showScoreboard();

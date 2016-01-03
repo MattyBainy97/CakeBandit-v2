@@ -40,8 +40,15 @@ public class PlayerInteractEntity extends CBListener {
                     Database.updateCbTable(msg, "points", Database.getCb(msg, "points") + 10);
                     Database.updateCbTable(msg, "discovered", Database.getCb(msg, "discovered") + 1);
                     Database.closeConnection();
-
-                    ChatUtilities.oneSubTitle(ChatColor.GOLD + "You revealed the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + " and gained" + ChatColor.GREEN + " 10 " + ChatColor.GOLD + "points!", msg);
+                    
+                    ChatUtilities.oneTitle(" ", msg);
+                    for(Player p : Bukkit.getOnlinePlayers()){
+                        if(p == msg){
+                            ChatUtilities.oneSubTitle(ChatColor.GOLD + "You revealed the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + " and gained" + ChatColor.GREEN + " 10 " + ChatColor.GOLD + "points!", msg);
+                        }else{
+                            ChatUtilities.oneSubTitle(" ", p);
+                        }
+                    }
                     ChatUtilities.showTitle(ChatColor.RED + PlayerHandler.bandit.getName() + ChatColor.GOLD + " is the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + "!");
                 } else {
                     PlayerHandler.addTested(rightclick);
@@ -55,6 +62,7 @@ public class PlayerInteractEntity extends CBListener {
                             for (Player everyone : Bukkit.getOnlinePlayers()) {
                                 everyone.hidePlayer(player);
                             }
+                            ChatUtilities.oneTitle(" ", player);
                             ChatUtilities.oneSubTitle(ChatColor.GOLD + "You lost" + ChatColor.RED + " 10 " + ChatColor.GOLD + "points for accusing " + ChatColor.GREEN + rightclick.getName() + ChatColor.GOLD + "!", player);
                             ChatUtilities.broadcast(ChatColor.GREEN + player.getName() + ChatColor.GOLD + " was removed for incorrectly accusing " + ChatColor.GREEN + rightclick.getName() + ChatColor.GOLD + "!");
                             Database.openConnection();
@@ -66,6 +74,7 @@ public class PlayerInteractEntity extends CBListener {
                             player.setAllowFlight(true);
                             player.setFlying(true);
                             player.getInventory().clear();
+                            player.getInventory().addItem(CBItem.spec);
                             player.teleport(LocationUtilities.spawns[0]);
                             
                             PlayerHandler.addSpec(player);

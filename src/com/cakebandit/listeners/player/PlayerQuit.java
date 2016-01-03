@@ -28,7 +28,7 @@ public class PlayerQuit extends CBListener {
 
         if (GameState.isState(GameState.IN_LOBBY)) {
 
-            Game.setCanStart(Bukkit.getOnlinePlayers().size() - 1 >= 3);
+            Game.setCanStart(Bukkit.getOnlinePlayers().size() - 1 >= 2);
             
             if (q.getPlayer() == PlayerHandler.bandit) {
                 

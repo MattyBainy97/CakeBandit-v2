@@ -59,8 +59,8 @@ public class PlayerDeath extends CBListener {
 
         } else if (e.getEntity().getKiller() == PlayerHandler.bandit) {
 
-            ChatUtilities.broadcast(ChatColor.RED + PlayerHandler.bandit.getName() + " has killed " + ChatColor.GREEN + e.getEntity().getName() + ChatColor.GOLD + "!");
-            PlayerHandler.bandit.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 80, 2));
+            ChatUtilities.broadcast(ChatColor.RED + PlayerHandler.bandit.getName() + ChatColor.GOLD + " has killed " + ChatColor.GREEN + e.getEntity().getName() + ChatColor.GOLD + "!");
+            PlayerHandler.bandit.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 120, 1));
             ChatUtilities.oneTitle(" ", killer);
             ChatUtilities.oneSubTitle(ChatColor.GOLD + "You got" + ChatColor.GREEN + " 5 " + ChatColor.GOLD + "points for killing " + ChatColor.GREEN + e.getEntity().getName() + ChatColor.GOLD + "!", PlayerHandler.bandit);
             Database.updateCbTable(killer, "points", Database.getCb(killer, "points") + 5);
