@@ -6,7 +6,6 @@ import com.cakebandit.handlers.Database;
 import com.cakebandit.handlers.PlayerHandler;
 import java.lang.reflect.Field;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
-import net.minecraft.server.v1_8_R3.IChatBaseComponent.ChatSerializer;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
@@ -52,61 +51,19 @@ public class ChatUtilities {
 
     }
 
-    public static void showTitle(String msg) {
-
-        IChatBaseComponent chatTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + msg + "\"}");
-        PacketPlayOutTitle title = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, chatTitle, 5, 40, 5);
-
-        for (Player p : Bukkit.getOnlinePlayers()) {
-
-            ((CraftPlayer) p).getHandle().playerConnection.sendPacket(title);
-
-        }
-
-    }
-
     public static void accusedPlayer(Player accuser, Player accused) {
 
         if (AccusationHandler.getAccusationCount(accuser) == 0) {
             AccusationHandler.newAccusation(accuser, accused);
-            IChatBaseComponent accuse = ChatSerializer.a("{\"text\":\"" + starter() + ChatColor.GREEN + "Accuse §3" + accused.getName() + "§a?\",\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/accuse " + accused.getName() + "\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to accuse §3" + accused.getName() + "\",\"color\":\"green\"}]}}}");
+            IChatBaseComponent accuse = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + starter() + ChatColor.GREEN + "Accuse §3" + accused.getName() + "§a?\",\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/accuse " + accused.getName() + "\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to accuse §3" + accused.getName() + "\",\"color\":\"green\"}]}}}");
             PacketPlayOutChat packet = new PacketPlayOutChat(accuse);
             ((CraftPlayer) accuser).getHandle().playerConnection.sendPacket(packet);
-            IChatBaseComponent noaccuse = ChatSerializer.a("{\"text\":\"" + starter() + ChatColor.DARK_RED + "Don't Accuse §3" + accused.getName() + "§4?\",\"color\":\"dark_red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/accuse " + accused.getName() + " no\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to not accuse §3" + accused.getName() + "\",\"color\":\"dark_red\"}]}}}");
+            IChatBaseComponent noaccuse = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + starter() + ChatColor.DARK_RED + "Don't Accuse §3" + accused.getName() + "§4?\",\"color\":\"dark_red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/accuse " + accused.getName() + " no\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to not accuse §3" + accused.getName() + "\",\"color\":\"dark_red\"}]}}}");
             PacketPlayOutChat packet2 = new PacketPlayOutChat(noaccuse);
             ((CraftPlayer) accuser).getHandle().playerConnection.sendPacket(packet2);
-        }else{
+        } else {
             onePlayer("You already have an accusation in progress!", accuser);
         }
-
-    }
-
-    public static void showSubTitle(String msg) {
-
-        IChatBaseComponent chatSubTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + msg + "\"}");
-        PacketPlayOutTitle subTitle = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.SUBTITLE, chatSubTitle, 5, 40, 5);
-
-        for (Player p : Bukkit.getOnlinePlayers()) {
-
-            ((CraftPlayer) p).getHandle().playerConnection.sendPacket(subTitle);
-
-        }
-
-    }
-
-    public static void oneSubTitle(String msg, Player p) {
-
-        IChatBaseComponent chatSubTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + msg + "\"}");
-        PacketPlayOutTitle subTitle = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.SUBTITLE, chatSubTitle, 5, 40, 5);
-        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(subTitle);
-
-    }
-
-    public static void oneTitle(String msg, Player p) {
-
-        IChatBaseComponent chatTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + msg + "\"}");
-        PacketPlayOutTitle title = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, chatTitle, 5, 40, 5);
-        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(title);
 
     }
 
@@ -123,11 +80,11 @@ public class ChatUtilities {
             if (PlayerHandler.alive.contains(player.getUniqueId())) {
 
                 if (PlayerHandler.tested.contains(player.getUniqueId()) && player != PlayerHandler.getBandit()) {
-                    Bukkit.broadcastMessage(GREEN + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);
+                    Bukkit.broadcastMessage(chatStarter(player) + GREEN + player.getName() + ChatColor.GRAY + " » " + WHITE + msg);
                 } else if (player == PlayerHandler.bandit && PlayerHandler.isCaught == true) {
-                    Bukkit.broadcastMessage(RED + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);
+                    Bukkit.broadcastMessage(chatStarter(player) + RED + player.getName() + ChatColor.GRAY + " » " + WHITE + msg);
                 } else {
-                    Bukkit.broadcastMessage(DARK_AQUA + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);
+                    Bukkit.broadcastMessage(chatStarter(player) + DARK_AQUA + player.getName() + ChatColor.GRAY + " » " + WHITE + msg);
                 }
 
             } else {
@@ -135,16 +92,74 @@ public class ChatUtilities {
 
                     if (PlayerHandler.spec.contains(p.getUniqueId())) {
 
-                        p.sendMessage(DARK_RED + "DEAD " + DARK_AQUA + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);
+                        p.sendMessage(DARK_RED + "DEAD " + chatStarter(player) + DARK_AQUA + player.getName() + ChatColor.GRAY + " » " + WHITE + msg);
 
                     }
 
                 }
             }
         } else {
-            Bukkit.broadcastMessage(GRAY + "(" + YELLOW + Database.getCb(player, "points") + GRAY + ") " + DARK_AQUA + player.getDisplayName() + ChatColor.GRAY + " » " + WHITE + msg);
+            Bukkit.broadcastMessage(GRAY + "(" + YELLOW + Database.getCb(player, "points") + GRAY + ") " + chatStarter(player) + DARK_AQUA + player.getName() + ChatColor.GRAY + " » " + WHITE + msg);
         }
         Database.closeConnection();
+
+    }
+
+    public static String chatStarter(Player p) {
+
+        Database.openConnection();
+
+        int points = Database.getCb(p, "points");
+        int highestPoints = Database.getHighestPoints();
+
+        Database.closeConnection();
+
+        if (points == highestPoints) {
+
+            return RED + "§lM" + GOLD + "§la" + YELLOW + "§lr" + GREEN + "§ly " + BLUE + "§lB" + DARK_PURPLE + "§le" + LIGHT_PURPLE + "§lr" + RED + "§lr" + GOLD + "§ly " + YELLOW + "§l| ";
+
+        } else {
+
+            if (points < 0) {
+
+                return DARK_RED + "§lCake Bait | ";
+
+            } else if (points >= 0 && points <= 50) {
+
+                return GOLD + "Brownie | ";
+
+            } else if (points >= 51 && points <= 250) {
+
+                return LIGHT_PURPLE + "Cupcake | ";
+
+            } else if (points >= 251 && points <= 1000) {
+
+                return BLUE + "Scone | ";
+
+            } else if (points >= 1001 && points <= 2500) {
+
+                return YELLOW + "Cheese Cake | ";
+
+            } else if (points >= 2501 && points <= 5000) {
+
+                return GREEN + "Victoria Sponge | ";
+
+            } else if (points >= 5001 && points <= 10000) {
+
+                return RED + "Red Velvet Cake | ";
+
+            } else if (points >= 10001 && points <= 50000) {
+
+                return BLACK + "Black Forest Cake | ";
+
+            } else if (points >= 50001) {
+
+                return DARK_GREEN + "Paul Hollywood | ";
+
+            }
+        }
+
+        return "";
 
     }
 

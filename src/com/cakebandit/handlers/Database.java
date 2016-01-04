@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -192,6 +193,32 @@ public class Database {
         }catch(Exception e){
         
             e.printStackTrace();
+            
+        }
+        
+    }
+    
+    public synchronized static int getHighestPoints(){
+        
+        try{
+            
+            PreparedStatement getScore = connection.prepareStatement("SELECT MAX(points) FROM cakebandit;");
+            ResultSet resultSet = getScore.executeQuery();
+            int result = 0;
+            
+            while(resultSet.next()){
+                result = resultSet.getInt(1);
+            }
+            
+            getScore.close();
+            
+            return result;
+            
+        }catch(Exception e){
+        
+            e.printStackTrace();
+            
+            return 0;
             
         }
         

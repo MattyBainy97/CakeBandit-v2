@@ -201,7 +201,7 @@ public class CakeBandit extends JavaPlugin {
 
         if (commandLabel.equalsIgnoreCase("accuse")) {
             final Player accuser = (Player) sender;
-            if (AccusationHandler.hasAccusation(accuser)) {
+            if (AccusationHandler.hasAccusation(accuser) && PlayerHandler.isCaught == false) {
                 final Player accused = AccusationHandler.getAccused(accuser);
                 if (args.length == 1) {
 
@@ -219,16 +219,12 @@ public class CakeBandit extends JavaPlugin {
                         Database.updateCbTable(msg, "points", Database.getCb(msg, "points") + 10);
                         Database.updateCbTable(msg, "discovered", Database.getCb(msg, "discovered") + 1);
                         Database.closeConnection();
-
-                        ChatUtilities.oneTitle(" ", msg);
                         for (Player p : Bukkit.getOnlinePlayers()) {
                             if (p == msg) {
-                                ChatUtilities.oneSubTitle(ChatColor.GOLD + "You revealed the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + " and gained" + ChatColor.GREEN + " 10 " + ChatColor.GOLD + "points!", msg);
-                            } else {
-                                ChatUtilities.oneSubTitle(" ", p);
+                                ChatUtilities.onePlayer(ChatColor.GOLD + "You revealed the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + " and gained" + ChatColor.GREEN + " 10 " + ChatColor.GOLD + "points!", msg);
                             }
                         }
-                        ChatUtilities.showTitle(ChatColor.RED + PlayerHandler.bandit.getName() + ChatColor.GOLD + " is the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + "!");
+                        ChatUtilities.broadcast(ChatColor.RED + PlayerHandler.bandit.getName() + ChatColor.GOLD + " is the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + "!");
                     } else {
                         PlayerHandler.addTested(accused);
                         PlayerHandler.removeUntested(accused);
@@ -241,8 +237,7 @@ public class CakeBandit extends JavaPlugin {
                                 for (Player everyone : Bukkit.getOnlinePlayers()) {
                                     everyone.hidePlayer(player);
                                 }
-                                ChatUtilities.oneTitle(" ", player);
-                                ChatUtilities.oneSubTitle(ChatColor.GOLD + "You lost" + ChatColor.RED + " 10 " + ChatColor.GOLD + "points for accusing " + ChatColor.GREEN + accused.getName() + ChatColor.GOLD + "!", player);
+                                ChatUtilities.onePlayer(ChatColor.GOLD + "You lost" + ChatColor.RED + " 10 " + ChatColor.GOLD + "points for accusing " + ChatColor.GREEN + accused.getName() + ChatColor.GOLD + "!", player);
                                 ChatUtilities.broadcast(ChatColor.GREEN + player.getName() + ChatColor.GOLD + " was removed for incorrectly accusing " + ChatColor.GREEN + accused.getName() + ChatColor.GOLD + "!");
                                 Database.openConnection();
                                 Database.updateCbTable(player, "points", Database.getCb(player, "points") - 10);
