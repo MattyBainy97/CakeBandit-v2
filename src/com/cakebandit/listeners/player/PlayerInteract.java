@@ -1,6 +1,8 @@
 package com.cakebandit.listeners.player;
 
 import com.cakebandit.CakeBandit;
+import com.cakebandit.GameState;
+import com.cakebandit.GameState;
 import com.cakebandit.handlers.CBItem;
 import com.cakebandit.handlers.Database;
 import com.cakebandit.handlers.Game;
@@ -74,7 +76,7 @@ public class PlayerInteract extends CBListener {
 
             }
 
-            if (i.getClickedBlock().getType() == Material.CAKE_BLOCK && i.getPlayer() == PlayerHandler.bandit) {
+            if (i.getClickedBlock().getType() == Material.CAKE_BLOCK && i.getPlayer() == PlayerHandler.bandit && GameState.isState(GameState.IN_GAME)) {
 
                 i.getClickedBlock().setType(Material.AIR);
                 PlayerHandler.eatCake();

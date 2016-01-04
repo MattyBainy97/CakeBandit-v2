@@ -2,6 +2,7 @@ package com.cakebandit.handlers;
 
 import com.cakebandit.GameState;
 import com.cakebandit.CakeBandit;
+import com.cakebandit.threads.GameTimer;
 import com.cakebandit.threads.ReloadTimer;
 import com.cakebandit.utils.ChatUtilities;
 import com.cakebandit.utils.LocationUtilities;
@@ -27,7 +28,7 @@ public class Game {
             @Override
             public void run() {
                 
-                //new Thread(new GameTimer()).start();
+                new Thread(new GameTimer()).start();
                 GameState.setState(GameState.IN_GAME);
                 
                 if(PlayerHandler.forceb == false){
@@ -70,6 +71,7 @@ public class Game {
                     
                 }
                 
+                ChatUtilities.broadcast(ChatColor.YELLOW + "10 " + ChatColor.GOLD + "minutes left!");
                 PlayerHandler.isCaught = false;
                 PlayerHandler.initializeCake();
                 LocationUtilities.spawnCakes();

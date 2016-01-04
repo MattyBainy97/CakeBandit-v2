@@ -28,10 +28,11 @@ public class PlayerInteractEntity extends CBListener {
             if (ie.getPlayer().getItemInHand().equals(CBItem.stick)) {
                 ChatUtilities.accusedPlayer(ie.getPlayer(), rightclick);
             }
-        }
-        if (PlayerHandler.tested.contains(rightclick.getUniqueId()) && rightclick != PlayerHandler.bandit) {
-            Player msg = ie.getPlayer();
-            ChatUtilities.onePlayer(ChatColor.GREEN + rightclick.getName() + ChatColor.GOLD + " is a " + ChatColor.GREEN + "CITIZEN" + ChatColor.GOLD + "!", msg);
+        } else if (PlayerHandler.tested.contains(rightclick.getUniqueId()) && rightclick != PlayerHandler.bandit) {
+            if (ie.getPlayer().getItemInHand().equals(CBItem.stick)) {
+                Player msg = ie.getPlayer();
+                ChatUtilities.onePlayer(ChatColor.GREEN + rightclick.getName() + ChatColor.GOLD + " is a " + ChatColor.GREEN + "CITIZEN" + ChatColor.GOLD + "!", msg);
+            }
         }
 
     }

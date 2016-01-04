@@ -48,6 +48,12 @@ public class CakeBandit extends JavaPlugin {
     public void onEnable() {
 
         plugin = this;
+        
+        for (Player p : Bukkit.getOnlinePlayers()) {
+
+            p.kickPlayer(ChatColor.GREEN + "CakeBandit is restarting! Rejoin to play another game!");
+
+        }
 
         for (World w : Bukkit.getServer().getWorlds()) {
 
@@ -64,7 +70,8 @@ public class CakeBandit extends JavaPlugin {
         Game.setCanStart(false);
         new Thread(new StartCountdown()).start();
         CakeSB.initializeScoreboard();
-        LocationUtilities.initializeSwordSpawns();
+        //LocationUtilities.initializeSwordSpawns();
+        LocationUtilities.initializeMountTrayaSpawns();
         registerListeners();
 
     }
@@ -76,12 +83,6 @@ public class CakeBandit extends JavaPlugin {
 
         CakeSB.unregisterTeams();
         PlayerHandler.clearAll();
-        
-        for (Player p : Bukkit.getOnlinePlayers()) {
-
-            p.kickPlayer(ChatColor.GREEN + "Reloading. Rejoin.");
-
-        }
 
         try {
 
