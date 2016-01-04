@@ -18,10 +18,8 @@ commands:
     permission-message: Permission Denied!
   passes:
     description: Shows how many passes the user has
-  extend:
-    description: Extends time
-    permisssion: cakebandit.extend
-    permission-message: Permission Denied!
+  accuse:
+    description: Accuses the target
   records:
     description: Shows the player their records
     
@@ -31,8 +29,5 @@ permissions:
     default: op
   cakebandit.pass:
     description: Allows use of pass
-    default: op
-  cakebandit.extend:
-    description: Allows use of extend
     default: op
   

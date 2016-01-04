@@ -1,5 +1,7 @@
 package com.cakebandit;
 
+import com.cakebandit.handlers.AccusationHandler;
+import com.cakebandit.handlers.CBItem;
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,6 +31,7 @@ import com.cakebandit.utils.ChatUtilities;
 import com.cakebandit.utils.LocationUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -46,12 +49,6 @@ public class CakeBandit extends JavaPlugin {
 
         plugin = this;
 
-        for (Player p : Bukkit.getOnlinePlayers()) {
-
-            p.kickPlayer(ChatColor.GREEN + "Reloading. Rejoin.");
-
-        }
-
         for (World w : Bukkit.getServer().getWorlds()) {
 
             w.setTime(0);
@@ -67,7 +64,7 @@ public class CakeBandit extends JavaPlugin {
         Game.setCanStart(false);
         new Thread(new StartCountdown()).start();
         CakeSB.initializeScoreboard();
-        LocationUtilities.initializeSpawns();
+        LocationUtilities.initializeSwordSpawns();
         registerListeners();
 
     }
@@ -79,6 +76,12 @@ public class CakeBandit extends JavaPlugin {
 
         CakeSB.unregisterTeams();
         PlayerHandler.clearAll();
+        
+        for (Player p : Bukkit.getOnlinePlayers()) {
+
+            p.kickPlayer(ChatColor.GREEN + "Reloading. Rejoin.");
+
+        }
 
         try {
 
@@ -176,7 +179,7 @@ public class CakeBandit extends JavaPlugin {
                                     ChatUtilities.onePlayer(ChatColor.GOLD + "You have sent " + ChatColor.GREEN + i + ChatColor.GOLD + " passes to " + ChatColor.DARK_AQUA + targetPlayer.getName() + ChatColor.GOLD + "!", p);
                                 }
                                 Database.updatePasses(targetPlayer, Database.getPasses(targetPlayer) + i);
-                            }else{
+                            } else {
                                 ChatUtilities.onePlayer(ChatColor.GOLD + "Enter a serious number... " + ChatColor.RED + i + ChatColor.GOLD + " is just too many...", p);
                             }
                         } catch (Exception e) {
@@ -189,6 +192,78 @@ public class CakeBandit extends JavaPlugin {
                 }
             }
             Database.closeConnection();
+        }
+
+        if (commandLabel.equalsIgnoreCase("accuse")) {
+            final Player accuser = (Player) sender;
+            if (AccusationHandler.hasAccusation(accuser)) {
+                final Player accused = AccusationHandler.getAccused(accuser);
+                if (args.length == 1) {
+
+                    ChatUtilities.onePlayer(ChatColor.GOLD + "You accused " + ChatColor.DARK_AQUA + accused.getName() + ChatColor.GOLD + "!", accuser);
+                    if (accused == PlayerHandler.bandit) {
+
+                        PlayerHandler.removeUntested(PlayerHandler.bandit);
+                        PlayerHandler.addTested(PlayerHandler.bandit);
+                        PlayerHandler.setCaught(true);
+
+                        Player msg = accuser;
+                        PlayerHandler.bandit.getInventory().setHelmet(CBItem.red);
+
+                        Database.openConnection();
+                        Database.updateCbTable(msg, "points", Database.getCb(msg, "points") + 10);
+                        Database.updateCbTable(msg, "discovered", Database.getCb(msg, "discovered") + 1);
+                        Database.closeConnection();
+
+                        ChatUtilities.oneTitle(" ", msg);
+                        for (Player p : Bukkit.getOnlinePlayers()) {
+                            if (p == msg) {
+                                ChatUtilities.oneSubTitle(ChatColor.GOLD + "You revealed the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + " and gained" + ChatColor.GREEN + " 10 " + ChatColor.GOLD + "points!", msg);
+                            } else {
+                                ChatUtilities.oneSubTitle(" ", p);
+                            }
+                        }
+                        ChatUtilities.showTitle(ChatColor.RED + PlayerHandler.bandit.getName() + ChatColor.GOLD + " is the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + "!");
+                    } else {
+                        PlayerHandler.addTested(accused);
+                        PlayerHandler.removeUntested(accused);
+
+                        accused.getInventory().setHelmet(CBItem.green);
+                        CakeBandit.plugin.getServer().getScheduler().scheduleAsyncDelayedTask(CakeBandit.plugin, new Runnable() {
+                            @Override
+                            public void run() {
+                                Player player = accuser;
+                                for (Player everyone : Bukkit.getOnlinePlayers()) {
+                                    everyone.hidePlayer(player);
+                                }
+                                ChatUtilities.oneTitle(" ", player);
+                                ChatUtilities.oneSubTitle(ChatColor.GOLD + "You lost" + ChatColor.RED + " 10 " + ChatColor.GOLD + "points for accusing " + ChatColor.GREEN + accused.getName() + ChatColor.GOLD + "!", player);
+                                ChatUtilities.broadcast(ChatColor.GREEN + player.getName() + ChatColor.GOLD + " was removed for incorrectly accusing " + ChatColor.GREEN + accused.getName() + ChatColor.GOLD + "!");
+                                Database.openConnection();
+                                Database.updateCbTable(player, "points", Database.getCb(player, "points") - 10);
+                                Database.updateCbTable(player, "deaths", Database.getCb(player, "deaths") + 1);
+                                Database.closeConnection();
+
+                                player.setGameMode(GameMode.ADVENTURE);
+                                player.setAllowFlight(true);
+                                player.setFlying(true);
+                                player.getInventory().clear();
+                                player.getInventory().addItem(CBItem.spec);
+                                player.teleport(LocationUtilities.spawns[0]);
+
+                                PlayerHandler.addSpec(player);
+                                PlayerHandler.removeAlive(player);
+                            }
+                        }, 20L);
+                    }
+                    AccusationHandler.removeAccusation(accuser);
+                } else if (args.length == 2) {
+
+                    AccusationHandler.removeAccusation(accuser);
+                    ChatUtilities.onePlayer(ChatColor.GOLD + "You cancelled the accusation on " + ChatColor.DARK_AQUA + accused.getName() + ChatColor.GOLD + "!", accuser);
+
+                }
+            }
         }
 
         if (commandLabel.equalsIgnoreCase("bandit")) {

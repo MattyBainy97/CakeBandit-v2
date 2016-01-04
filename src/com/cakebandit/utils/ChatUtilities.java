@@ -1,10 +1,12 @@
 package com.cakebandit.utils;
 
 import com.cakebandit.GameState;
+import com.cakebandit.handlers.AccusationHandler;
 import com.cakebandit.handlers.Database;
 import com.cakebandit.handlers.PlayerHandler;
 import java.lang.reflect.Field;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
+import net.minecraft.server.v1_8_R3.IChatBaseComponent.ChatSerializer;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
@@ -59,6 +61,22 @@ public class ChatUtilities {
 
             ((CraftPlayer) p).getHandle().playerConnection.sendPacket(title);
 
+        }
+
+    }
+
+    public static void accusedPlayer(Player accuser, Player accused) {
+
+        if (AccusationHandler.getAccusationCount(accuser) == 0) {
+            AccusationHandler.newAccusation(accuser, accused);
+            IChatBaseComponent accuse = ChatSerializer.a("{\"text\":\"" + starter() + ChatColor.GREEN + "Accuse §3" + accused.getName() + "§a?\",\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/accuse " + accused.getName() + "\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to accuse §3" + accused.getName() + "\",\"color\":\"green\"}]}}}");
+            PacketPlayOutChat packet = new PacketPlayOutChat(accuse);
+            ((CraftPlayer) accuser).getHandle().playerConnection.sendPacket(packet);
+            IChatBaseComponent noaccuse = ChatSerializer.a("{\"text\":\"" + starter() + ChatColor.DARK_RED + "Don't Accuse §3" + accused.getName() + "§4?\",\"color\":\"dark_red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/accuse " + accused.getName() + " no\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to not accuse §3" + accused.getName() + "\",\"color\":\"dark_red\"}]}}}");
+            PacketPlayOutChat packet2 = new PacketPlayOutChat(noaccuse);
+            ((CraftPlayer) accuser).getHandle().playerConnection.sendPacket(packet2);
+        }else{
+            onePlayer("You already have an accusation in progress!", accuser);
         }
 
     }

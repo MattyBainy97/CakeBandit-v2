@@ -63,11 +63,6 @@ public class PlayerInteract extends CBListener {
                 for (int j = 0; j < PlayerHandler.alive.size(); j++) {
                     String playerName = Bukkit.getPlayer(PlayerHandler.alive.get(j)).getName();
                     ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-                    LocationUtilities.head.getBlock().setType(Material.SKULL_ITEM);
-                    Skull skullb = (Skull) LocationUtilities.head.getBlock().getState();
-                    skullb.setSkullType(SkullType.PLAYER);
-                    skullb.setOwner(playerName);
-                    skullb.update();
                     SkullMeta meta = (SkullMeta) skull.getItemMeta();
                     meta.setOwner(playerName);
                     meta.setDisplayName(playerName);
