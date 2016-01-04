@@ -48,7 +48,7 @@ public class CakeBandit extends JavaPlugin {
     public void onEnable() {
 
         plugin = this;
-        
+
         for (Player p : Bukkit.getOnlinePlayers()) {
 
             p.kickPlayer(ChatColor.GREEN + "CakeBandit is restarting! Rejoin to play another game!");
@@ -64,14 +64,18 @@ public class CakeBandit extends JavaPlugin {
                 e.remove();
             }
 
+            if (w.getName().contains("Sword")) {
+                LocationUtilities.initializeSwordSpawns();
+            } else if (w.getName().contains("MountTraya")) {
+                LocationUtilities.initializeMountTrayaSpawns();
+            }
+
         }
 
         GameState.setState(GameState.IN_LOBBY);
         Game.setCanStart(false);
         new Thread(new StartCountdown()).start();
         CakeSB.initializeScoreboard();
-        //LocationUtilities.initializeSwordSpawns();
-        LocationUtilities.initializeMountTrayaSpawns();
         registerListeners();
 
     }
