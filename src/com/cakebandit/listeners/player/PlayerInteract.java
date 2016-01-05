@@ -11,6 +11,7 @@ import com.cakebandit.utils.ChatUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -73,6 +74,7 @@ public class PlayerInteract extends CBListener {
             if (i.getClickedBlock().getType() == Material.CAKE_BLOCK && i.getPlayer() == PlayerHandler.bandit && GameState.isState(GameState.IN_GAME)) {
 
                 i.getClickedBlock().setType(Material.AIR);
+                i.getClickedBlock().getWorld().playSound(i.getClickedBlock().getLocation(), Sound.EAT, 10, 1);
                 PlayerHandler.eatCake();
                 PlayerHandler.bandit.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 120, 1));
                 if (PlayerHandler.cakecount != 1) {

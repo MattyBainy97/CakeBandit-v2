@@ -2,6 +2,7 @@ package com.cakebandit.utils;
 
 import com.cakebandit.GameState;
 import com.cakebandit.handlers.AccusationHandler;
+import com.cakebandit.handlers.CBItem;
 import com.cakebandit.handlers.Database;
 import com.cakebandit.handlers.PlayerHandler;
 import java.lang.reflect.Field;
@@ -12,8 +13,12 @@ import net.minecraft.server.v1_8_R3.PlayerConnection;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import static org.bukkit.ChatColor.*;
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 
 public class ChatUtilities {
 
@@ -55,12 +60,20 @@ public class ChatUtilities {
 
         if (AccusationHandler.getAccusationCount(accuser) == 0) {
             AccusationHandler.newAccusation(accuser, accused);
-            IChatBaseComponent accuse = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + starter() + ChatColor.GREEN + "Accuse §3" + accused.getName() + "§a?\",\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/accuse " + accused.getName() + "\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to accuse §3" + accused.getName() + "\",\"color\":\"green\"}]}}}");
+            /*IChatBaseComponent accuse = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + starter() + ChatColor.GREEN + "Accuse §3" + accused.getName() + "§a?\",\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/accuse " + accused.getName() + "\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to accuse §3" + accused.getName() + "\",\"color\":\"green\"}]}}}");
             PacketPlayOutChat packet = new PacketPlayOutChat(accuse);
             ((CraftPlayer) accuser).getHandle().playerConnection.sendPacket(packet);
             IChatBaseComponent noaccuse = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + starter() + ChatColor.DARK_RED + "Don't Accuse §3" + accused.getName() + "§4?\",\"color\":\"dark_red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/accuse " + accused.getName() + " no\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to not accuse §3" + accused.getName() + "\",\"color\":\"dark_red\"}]}}}");
             PacketPlayOutChat packet2 = new PacketPlayOutChat(noaccuse);
-            ((CraftPlayer) accuser).getHandle().playerConnection.sendPacket(packet2);
+            ((CraftPlayer) accuser).getHandle().playerConnection.sendPacket(packet2);*/
+            
+            Inventory inv = Bukkit.createInventory(null, 9, "Accuse " + accused.getName() + "?");
+
+                    inv.setItem(2, CBItem.accuse);
+                    inv.setItem(6, CBItem.deny);
+
+            accuser.openInventory(inv);
+            
         } else {
             onePlayer("You already have an accusation in progress!", accuser);
         }
@@ -124,35 +137,35 @@ public class ChatUtilities {
 
                 return DARK_RED + "§lCake Bait | ";
 
-            } else if (points >= 0 && points <= 50) {
+            } else if (points >= 0 && points <= 49) {
 
                 return GOLD + "Brownie | ";
 
-            } else if (points >= 51 && points <= 250) {
+            } else if (points >= 50 && points <= 249) {
 
                 return LIGHT_PURPLE + "Cupcake | ";
 
-            } else if (points >= 251 && points <= 1000) {
+            } else if (points >= 250 && points <= 999) {
 
                 return BLUE + "Scone | ";
 
-            } else if (points >= 1001 && points <= 2500) {
+            } else if (points >= 1000 && points <= 2499) {
 
                 return YELLOW + "Cheese Cake | ";
 
-            } else if (points >= 2501 && points <= 5000) {
+            } else if (points >= 2500 && points <= 4999) {
 
                 return GREEN + "Victoria Sponge | ";
 
-            } else if (points >= 5001 && points <= 10000) {
+            } else if (points >= 5000 && points <= 9999) {
 
                 return RED + "Red Velvet Cake | ";
 
-            } else if (points >= 10001 && points <= 50000) {
+            } else if (points >= 10000 && points <= 49999) {
 
                 return BLACK + "Black Forest Cake | ";
 
-            } else if (points >= 50001) {
+            } else if (points >= 50000) {
 
                 return DARK_GREEN + "Paul Hollywood | ";
 

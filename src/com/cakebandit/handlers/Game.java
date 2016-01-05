@@ -9,6 +9,9 @@ import com.cakebandit.utils.LocationUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Instrument;
+import org.bukkit.Location;
+import org.bukkit.Note;
 import org.bukkit.entity.Player;
 
 public class Game {
@@ -80,6 +83,28 @@ public class Game {
     }
 
     public static void stop() {
+
+        for (final Location l : LocationUtilities.cakes) {
+
+            FireworkHandler.newFirework(l);
+            CakeBandit.plugin.getServer().getScheduler().scheduleSyncDelayedTask(CakeBandit.plugin, new Runnable() {
+                @Override
+                public void run() {
+
+                    FireworkHandler.newFirework(l);
+
+                }
+            }, 20L);
+            CakeBandit.plugin.getServer().getScheduler().scheduleSyncDelayedTask(CakeBandit.plugin, new Runnable() {
+                @Override
+                public void run() {
+
+                    FireworkHandler.newFirework(l);
+
+                }
+            }, 40L);
+
+        }
 
         GameState.setState(GameState.POST_GAME);
         new Thread(new ReloadTimer()).start();

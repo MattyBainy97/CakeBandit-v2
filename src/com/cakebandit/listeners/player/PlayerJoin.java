@@ -98,13 +98,13 @@ public class PlayerJoin extends CBListener {
 
         if (GameState.isState(GameState.IN_LOBBY)) {
             
-            LocationUtilities.teleportToLobby(p);
             ChatUtilities.broadcast(ChatColor.DARK_AQUA + e.getPlayer().getName() + ChatColor.GOLD + " joined the game");
             p.setHealth(20.0);
             p.setExp(0);
             p.removePotionEffect(PotionEffectType.INVISIBILITY);
             p.setGameMode(GameMode.ADVENTURE);
             Game.setCanStart(Bukkit.getOnlinePlayers().size() >= 2);
+            LocationUtilities.teleportToLobby(p);
 
         } else {
             

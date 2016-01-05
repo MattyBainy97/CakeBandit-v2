@@ -10,6 +10,7 @@ import com.cakebandit.handlers.Game;
 import com.cakebandit.handlers.CakeSB;
 import com.cakebandit.handlers.PlayerHandler;
 import com.cakebandit.listeners.inventory.ClickSlot;
+import com.cakebandit.listeners.inventory.CloseInventory;
 import com.cakebandit.listeners.player.AsyncPlayerPreLogin;
 import com.cakebandit.listeners.player.OnChat;
 import com.cakebandit.listeners.player.PlayerDamage;
@@ -32,6 +33,9 @@ import com.cakebandit.utils.LocationUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Instrument;
+import org.bukkit.Note;
+import org.bukkit.Note.Tone;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -219,10 +223,23 @@ public class CakeBandit extends JavaPlugin {
                         Database.updateCbTable(msg, "points", Database.getCb(msg, "points") + 10);
                         Database.updateCbTable(msg, "discovered", Database.getCb(msg, "discovered") + 1);
                         Database.closeConnection();
-                        for (Player p : Bukkit.getOnlinePlayers()) {
+                        for (final Player p : Bukkit.getOnlinePlayers()) {
                             if (p == msg) {
                                 ChatUtilities.onePlayer(ChatColor.GOLD + "You revealed the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + " and gained" + ChatColor.GREEN + " 10 " + ChatColor.GOLD + "points!", msg);
                             }
+                            p.playNote(p.getLocation(), Instrument.PIANO, new Note(0, Tone.D, true));
+                            CakeBandit.plugin.getServer().getScheduler().scheduleSyncDelayedTask(CakeBandit.plugin, new Runnable() {
+                                @Override
+                                public void run() {
+                                    p.playNote(p.getLocation(), Instrument.PIANO, new Note(0, Tone.C, false));
+                                }
+                            }, 10L);
+                            CakeBandit.plugin.getServer().getScheduler().scheduleSyncDelayedTask(CakeBandit.plugin, new Runnable() {
+                                @Override
+                                public void run() {
+                                    p.playNote(p.getLocation(), Instrument.PIANO, new Note(1, Tone.G, false));
+                                }
+                            }, 20L);
                         }
                         ChatUtilities.broadcast(ChatColor.RED + PlayerHandler.bandit.getName() + ChatColor.GOLD + " is the " + ChatColor.RED + "BANDIT" + ChatColor.GOLD + "!");
                     } else {
@@ -317,6 +334,7 @@ public class CakeBandit extends JavaPlugin {
         pm.registerEvents(new ListPing(this), this);
         pm.registerEvents(new BlockBreak(this), this);
         pm.registerEvents(new BlockPlace(this), this);
+        pm.registerEvents(new CloseInventory(this), this);
 
     }
 }

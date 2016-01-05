@@ -2,6 +2,7 @@ package com.cakebandit.listeners.inventory;
 
 import com.cakebandit.GameState;
 import com.cakebandit.CakeBandit;
+import com.cakebandit.handlers.AccusationHandler;
 import com.cakebandit.handlers.PlayerHandler;
 import com.cakebandit.listeners.CBListener;
 import com.cakebandit.utils.ChatUtilities;
@@ -24,11 +25,30 @@ public class ClickSlot extends CBListener {
         if (!GameState.isState(GameState.IN_LOBBY)) {
             if (e.getSlot() >= 0) {
                 Player p = (Player) e.getWhoClicked();
-                Player tp = Bukkit.getPlayer(e.getCurrentItem().getItemMeta().getDisplayName());
-                if(PlayerHandler.spec.contains(p.getUniqueId())){
-                    
+                if (PlayerHandler.spec.contains(p.getUniqueId())) {
+
+                    Player tp = Bukkit.getPlayer(e.getCurrentItem().getItemMeta().getDisplayName());
                     p.teleport(tp);
+
+                } else {
+
+                    if (AccusationHandler.hasAccusation(p)) {
+                        
+                        Player accused = AccusationHandler.getAccused(p);
                     
+                        if (e.getSlot() == 2) {
+
+                            p.performCommand("accuse " + accused.getName());
+                            p.closeInventory();
+
+                        }else if(e.getSlot() == 6){
+                            
+                            p.performCommand("accuse " + accused.getName() + " no");
+                            p.closeInventory();
+                            
+                        }
+                    }
+
                 }
                 e.setResult(Event.Result.DENY);
                 e.setCancelled(true);

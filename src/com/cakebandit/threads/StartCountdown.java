@@ -5,6 +5,10 @@ import com.cakebandit.handlers.Game;
 import com.cakebandit.utils.ChatUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Instrument;
+import org.bukkit.Note;
+import org.bukkit.Note.Tone;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 public class StartCountdown implements Runnable {
@@ -29,14 +33,31 @@ public class StartCountdown implements Runnable {
                             ChatUtilities.broadcast("Not enough players! Countdown restarting!");
                             break;
                         } else {
+                            for (Player p : Bukkit.getOnlinePlayers()) {
+
+                                p.playNote(p.getLocation(), Instrument.PIANO, new Note(1, Tone.F, false));
+
+                            }
                             Game.start();
                             break;
                         }
                     }
 
-                    if (timeUntilStart % 10 == 0 || timeUntilStart < 6) {
+                    if (timeUntilStart % 10 == 0) {
+
                         ChatUtilities.broadcast(ChatColor.YELLOW + "" + timeUntilStart + ChatColor.GOLD + " seconds until the game starts!");
+
                     }
+
+                    if (timeUntilStart < 4) {
+                        ChatUtilities.broadcast(ChatColor.YELLOW + "" + timeUntilStart + ChatColor.GOLD + " seconds until the game starts!");
+                        for (Player p : Bukkit.getOnlinePlayers()) {
+
+                            p.playNote(p.getLocation(), Instrument.PIANO, new Note(0, Tone.A, false));
+
+                        }
+                    }
+
 
                     try {
                         Thread.sleep(1000);

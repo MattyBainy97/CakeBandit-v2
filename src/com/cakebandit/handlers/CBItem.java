@@ -2,10 +2,12 @@ package com.cakebandit.handlers;
 
 import java.util.ArrayList;
 import org.bukkit.ChatColor;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.Dye;
 
 public class CBItem {
 
@@ -18,6 +20,10 @@ public class CBItem {
     public static ItemStack green = new ItemStack(Material.WOOL, 1, (short) 5);
     
     public static ItemStack spec = new ItemStack(Material.COMPASS, 1);
+    
+    public static ItemStack accuse;
+    
+    public static ItemStack deny;
 
     public static void setMetas() {
 
@@ -46,6 +52,20 @@ public class CBItem {
         ItemMeta mspec = (ItemMeta) spec.getItemMeta();
         mspec.setDisplayName(ChatColor.YELLOW + "SPECTATE");
         spec.setItemMeta(mspec);
+        
+        Dye lime = new Dye();
+        lime.setColor(DyeColor.LIME);
+        accuse = lime.toItemStack(1);
+        ItemMeta maccuse = accuse.getItemMeta();
+        maccuse.setDisplayName(ChatColor.GREEN + "ACCUSE");
+        accuse.setItemMeta(maccuse);
+        
+        Dye gray = new Dye();
+        gray.setColor(DyeColor.GRAY);
+        deny = gray.toItemStack(1);
+        ItemMeta mdeny = deny.getItemMeta();
+        mdeny.setDisplayName(ChatColor.DARK_RED + "DON'T ACCUSE");
+        deny.setItemMeta(mdeny);
 
     }
 }
