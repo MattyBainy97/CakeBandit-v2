@@ -18,7 +18,7 @@ public class FireworkHandler {
 
         Random r = new Random();
 
-        int rt = r.nextInt(5) + 1;
+        int rt = r.nextInt(4) + 1;
         Type type = Type.BALL;
         if (rt == 1) {
             type = Type.BALL;
@@ -36,8 +36,8 @@ public class FireworkHandler {
             type = Type.STAR;
         }
         
-        int r1i = r.nextInt(18) + 1;
-        int r2i = r.nextInt(18) + 1;
+        int r1i = r.nextInt(17) + 1;
+        int r2i = r.nextInt(17) + 1;
         Color c1 = getColor(r1i);
         Color c2 = getColor(r2i);
 
