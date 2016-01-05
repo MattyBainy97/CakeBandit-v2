@@ -25,13 +25,14 @@ public class PlayerDamage extends CBListener {
             if (d.getCause() == EntityDamageEvent.DamageCause.FALL) {
                 d.setCancelled(true);
             }
+            if (d.getCause() == EntityDamageEvent.DamageCause.DROWNING) {
+                d.setCancelled(true);
+            }
             if (PlayerHandler.isCaught == false) {
                 if (d.getEntity() instanceof Player) {
                     d.setCancelled(true);
                 }
             }
-        } else {
-            d.setCancelled(true);
         }
     }
 }

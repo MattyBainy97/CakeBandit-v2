@@ -41,28 +41,28 @@ public class LocationUtilities {
     
     public static void initializeMountTrayaSpawns() {
 
-        lobby = new Location(Bukkit.getWorld("MountTraya"), -1047, 38, 603);
+        lobby = new Location(Bukkit.getWorld("MountTraya"), 600, 52, 795);
 
-        cakes[0] = new Location(Bukkit.getWorld("MountTraya"), -1040, 41, 651);
-        cakes[1] = new Location(Bukkit.getWorld("MountTraya"), -1004, 57, 588);
-        cakes[2] = new Location(Bukkit.getWorld("MountTraya"), -996, 47, 648);
-        cakes[3] = new Location(Bukkit.getWorld("MountTraya"), -1004, 47, 659);
-        cakes[4] = new Location(Bukkit.getWorld("MountTraya"), -984, 48, 686);
-        cakes[5] = new Location(Bukkit.getWorld("MountTraya"), -1019, 44, 643);
-        cakes[6] = new Location(Bukkit.getWorld("MountTraya"), -1021, 42, 666);
-        cakes[7] = new Location(Bukkit.getWorld("MountTraya"), -1014, 56, 628);
-        cakes[8] = new Location(Bukkit.getWorld("MountTraya"), -1038, 49, 623);
+        cakes[0] = new Location(Bukkit.getWorld("MountTraya"), 668, 52, 809);
+        cakes[1] = new Location(Bukkit.getWorld("MountTraya"), 652, 53, 778);
+        cakes[2] = new Location(Bukkit.getWorld("MountTraya"), 598, 53, 820);
+        cakes[3] = new Location(Bukkit.getWorld("MountTraya"), 626, 61, 786);
+        cakes[4] = new Location(Bukkit.getWorld("MountTraya"), 597, 52, 808);
+        cakes[5] = new Location(Bukkit.getWorld("MountTraya"), 607, 59, 809);
+        cakes[6] = new Location(Bukkit.getWorld("MountTraya"), 600, 63, 793);
+        cakes[7] = new Location(Bukkit.getWorld("MountTraya"), 598, 72, 806);
+        cakes[8] = new Location(Bukkit.getWorld("MountTraya"), 612, 49, 804);
 
-        spawns[0] = new Location(Bukkit.getWorld("MountTraya"), -1032, 45, 624);
-        spawns[1] = new Location(Bukkit.getWorld("MountTraya"), -1028, 46, 632);
-        spawns[2] = new Location(Bukkit.getWorld("MountTraya"), -1034, 45, 632);
-        spawns[3] = new Location(Bukkit.getWorld("MountTraya"), -1032, 43, 639);
-        spawns[4] = new Location(Bukkit.getWorld("MountTraya"), -1034, 43, 641);
-        spawns[5] = new Location(Bukkit.getWorld("MountTraya"), -1032, 41, 645);
-        spawns[6] = new Location(Bukkit.getWorld("MountTraya"), -1036, 41, 648);
-        spawns[7] = new Location(Bukkit.getWorld("MountTraya"), -1030, 42, 649);
-        spawns[8] = new Location(Bukkit.getWorld("MountTraya"), -1027, 42, 650);
-        spawns[9] = new Location(Bukkit.getWorld("MountTraya"), -1027, 42, 646);
+        spawns[0] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 797.5, (float)180, 0);
+        spawns[1] = new Location(Bukkit.getWorld("MountTraya"), 675.5, 82.0, 797.5, (float)180, 0);
+        spawns[2] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 797.5, (float)180, 0);
+        spawns[3] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 795.5, (float)180, 0);
+        spawns[4] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 795.5, (float)180, 0);
+        spawns[5] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 793.5, (float)90, 0);
+        spawns[6] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 791.5, (float)0, 0);
+        spawns[7] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 791.5, (float)0, 0);
+        spawns[8] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 789.5, (float)0, 0);
+        spawns[9] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 789.5, (float)0, 0);
 
     }
 
