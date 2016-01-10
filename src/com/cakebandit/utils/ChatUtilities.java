@@ -6,6 +6,7 @@ import com.cakebandit.handlers.CBItem;
 import com.cakebandit.handlers.Database;
 import com.cakebandit.handlers.PlayerHandler;
 import java.lang.reflect.Field;
+import java.util.UUID;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
@@ -56,24 +57,81 @@ public class ChatUtilities {
 
     }
 
+    public static void showList(Player p) {
+
+        if (GameState.isState(GameState.IN_GAME)) {
+
+            String specs = "";
+            String alive = "";
+
+            for (UUID uuid : PlayerHandler.alive) {
+
+                Player c = Bukkit.getPlayer(uuid);
+                if (uuid == PlayerHandler.alive.get(PlayerHandler.alive.size() - 1)) {
+                    alive = alive + c.getName();
+                } else {
+                    alive = alive + c.getName() + ", ";
+                }
+
+            }
+
+            for (UUID uuid : PlayerHandler.spec) {
+
+                Player c = Bukkit.getPlayer(uuid);
+                if (uuid == PlayerHandler.spec.get(PlayerHandler.spec.size() - 1)) {
+                    specs = specs + c.getName();
+                } else {
+                    specs = specs + c.getName() + ", ";
+                }
+
+            }
+
+            p.sendMessage(DARK_GRAY + "" + BOLD + "Online Players");
+            p.sendMessage(GREEN + "ALIVE: " + GOLD + alive);
+            if (!specs.equals("")) {
+                p.sendMessage(DARK_RED + "DEAD: " + GOLD + specs);
+            }
+
+        } else {
+
+            String online = "";
+
+            for (UUID uuid : PlayerHandler.players) {
+
+                Player c = Bukkit.getPlayer(uuid);
+                if (uuid == PlayerHandler.players.get(PlayerHandler.players.size() - 1)) {
+                    online = online + c.getName();
+                } else {
+                    online = online + c.getName() + ", ";
+                }
+
+            }
+
+            p.sendMessage(DARK_GRAY + "" + BOLD + "Online Players");
+            p.sendMessage(GREEN + "ONLINE: " + GOLD + online);
+
+        }
+
+    }
+
     public static void accusedPlayer(Player accuser, Player accused) {
 
         if (AccusationHandler.getAccusationCount(accuser) == 0) {
             AccusationHandler.newAccusation(accuser, accused);
             /*IChatBaseComponent accuse = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + starter() + ChatColor.GREEN + "Accuse §3" + accused.getName() + "§a?\",\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/accuse " + accused.getName() + "\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to accuse §3" + accused.getName() + "\",\"color\":\"green\"}]}}}");
-            PacketPlayOutChat packet = new PacketPlayOutChat(accuse);
-            ((CraftPlayer) accuser).getHandle().playerConnection.sendPacket(packet);
-            IChatBaseComponent noaccuse = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + starter() + ChatColor.DARK_RED + "Don't Accuse §3" + accused.getName() + "§4?\",\"color\":\"dark_red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/accuse " + accused.getName() + " no\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to not accuse §3" + accused.getName() + "\",\"color\":\"dark_red\"}]}}}");
-            PacketPlayOutChat packet2 = new PacketPlayOutChat(noaccuse);
-            ((CraftPlayer) accuser).getHandle().playerConnection.sendPacket(packet2);*/
-            
+             PacketPlayOutChat packet = new PacketPlayOutChat(accuse);
+             ((CraftPlayer) accuser).getHandle().playerConnection.sendPacket(packet);
+             IChatBaseComponent noaccuse = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + starter() + ChatColor.DARK_RED + "Don't Accuse §3" + accused.getName() + "§4?\",\"color\":\"dark_red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/accuse " + accused.getName() + " no\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click to not accuse §3" + accused.getName() + "\",\"color\":\"dark_red\"}]}}}");
+             PacketPlayOutChat packet2 = new PacketPlayOutChat(noaccuse);
+             ((CraftPlayer) accuser).getHandle().playerConnection.sendPacket(packet2);*/
+
             Inventory inv = Bukkit.createInventory(null, 9, "Accuse " + accused.getName() + "?");
 
-                    inv.setItem(2, CBItem.accuse);
-                    inv.setItem(6, CBItem.deny);
+            inv.setItem(2, CBItem.accuse);
+            inv.setItem(6, CBItem.deny);
 
             accuser.openInventory(inv);
-            
+
         } else {
             onePlayer("You already have an accusation in progress!", accuser);
         }
@@ -163,7 +221,7 @@ public class ChatUtilities {
 
             } else if (points >= 10000 && points <= 49999) {
 
-                return BLACK + "Black Forest Cake | ";
+                return DARK_GRAY + "Black Forest Cake | ";
 
             } else if (points >= 50000) {
 

@@ -38,7 +38,7 @@ public class CBItem {
         ItemMeta bstickMeta = (ItemMeta) bstick.getItemMeta();
         bstickMeta.setDisplayName(ChatColor.RESET.RED + "Citizen Beater");
         bstickMeta.addEnchant(Enchantment.KNOCKBACK, 256, true);
-        bstickMeta.addEnchant(Enchantment.DAMAGE_ALL, 4, true);
+        bstickMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
         bstick.setItemMeta(bstickMeta);
 
         ItemMeta mred = (ItemMeta) red.getItemMeta();

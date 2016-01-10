@@ -76,7 +76,7 @@ public class PlayerInteract extends CBListener {
                 i.getClickedBlock().setType(Material.AIR);
                 i.getClickedBlock().getWorld().playSound(i.getClickedBlock().getLocation(), Sound.EAT, 10, 1);
                 PlayerHandler.eatCake();
-                PlayerHandler.bandit.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 120, 1));
+                PlayerHandler.bandit.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 30, 1));
                 if (PlayerHandler.cakecount != 1) {
                     ChatUtilities.onePlayer(ChatColor.RED + "" + PlayerHandler.cakecount + ChatColor.GOLD + " cakes left!", i.getPlayer());
                 } else {

@@ -9,9 +9,7 @@ import com.cakebandit.utils.LocationUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.Instrument;
 import org.bukkit.Location;
-import org.bukkit.Note;
 import org.bukkit.entity.Player;
 
 public class Game {

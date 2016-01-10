@@ -138,6 +138,16 @@ public class CakeBandit extends JavaPlugin {
 
         }
         
+        if (commandLabel.equalsIgnoreCase("list")){
+            
+            if (args.length == 0) {
+                
+                ChatUtilities.showList((Player) sender);
+
+            }
+            
+        }
+        
         if (commandLabel.equalsIgnoreCase("extend")){
             
             if (args.length == 0) {

@@ -21,7 +21,9 @@ commands:
   accuse:
     description: Accuses the target
   extend:
-    description: Extends the start timer
+    description: Extends the start timer by 60s
+  list:
+    description: Shows the online players
   records:
     description: Shows the player their records
     
