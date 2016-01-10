@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 
 public class StartCountdown implements Runnable {
 
-    private static int timeUntilStart;
+    public static int timeUntilStart;
     public static boolean forceStart;
 
     @Override

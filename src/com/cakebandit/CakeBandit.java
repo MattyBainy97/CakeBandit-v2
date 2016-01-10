@@ -72,6 +72,8 @@ public class CakeBandit extends JavaPlugin {
                 LocationUtilities.initializeSwordSpawns();
             } else if (w.getName().contains("MountTraya")) {
                 LocationUtilities.initializeMountTrayaSpawns();
+            } else if (w.getName().contains("Gallery")) {
+                LocationUtilities.initializeGallerySpawns();
             }
 
         }
@@ -134,6 +136,21 @@ public class CakeBandit extends JavaPlugin {
 
             }
 
+        }
+        
+        if (commandLabel.equalsIgnoreCase("extend")){
+            
+            if (args.length == 0) {
+                
+                ChatUtilities.broadcast("Start timer extended");
+                StartCountdown.timeUntilStart = StartCountdown.timeUntilStart + 60;
+
+            } else {
+
+                ChatUtilities.onePlayer("Wrong use of this command!", (Player) sender);
+
+            }
+            
         }
 
         if (commandLabel.equalsIgnoreCase("records")) {

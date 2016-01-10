@@ -20,6 +20,8 @@ commands:
     description: Shows how many passes the user has
   accuse:
     description: Accuses the target
+  extend:
+    description: Extends the start timer
   records:
     description: Shows the player their records
     

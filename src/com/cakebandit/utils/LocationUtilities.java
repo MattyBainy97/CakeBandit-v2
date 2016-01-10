@@ -65,6 +65,33 @@ public class LocationUtilities {
         spawns[9] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 789.5, (float)0, 0);
 
     }
+    
+    public static void initializeGallerySpawns() {
+
+        lobby = new Location(Bukkit.getWorld("Gallery"), 344, 4, 618);
+
+        cakes[0] = new Location(Bukkit.getWorld("Gallery"), 380, 3, 663);
+        cakes[1] = new Location(Bukkit.getWorld("Gallery"), 401, 4, 695);
+        cakes[2] = new Location(Bukkit.getWorld("Gallery"), 416, 4, 673);
+        cakes[3] = new Location(Bukkit.getWorld("Gallery"), 393, 4, 631);
+        cakes[4] = new Location(Bukkit.getWorld("Gallery"), 420, 5, 649);
+        cakes[5] = new Location(Bukkit.getWorld("Gallery"), 387, 10, 647);
+        cakes[6] = new Location(Bukkit.getWorld("Gallery"), 348, 5, 667);
+        cakes[7] = new Location(Bukkit.getWorld("Gallery"), 344, 4, 673);
+        cakes[8] = new Location(Bukkit.getWorld("Gallery"), 361, 4, 651);
+
+        spawns[0] = new Location(Bukkit.getWorld("Gallery"), 382.5, 4.0, 642.5, (float)0, 0);
+        spawns[1] = new Location(Bukkit.getWorld("Gallery"), 380.5, 4.0, 642.5, (float)0, 0);
+        spawns[2] = new Location(Bukkit.getWorld("Gallery"), 378.5, 4.0, 642.5, (float)0, 0);
+        spawns[3] = new Location(Bukkit.getWorld("Gallery"), 382.5, 4.0, 640.5, (float)0, 0);
+        spawns[4] = new Location(Bukkit.getWorld("Gallery"), 380.5, 4.0, 640.5, (float)0, 0);
+        spawns[5] = new Location(Bukkit.getWorld("Gallery"), 378.5, 4.0, 640.5, (float)0, 0);
+        spawns[6] = new Location(Bukkit.getWorld("Gallery"), 382.5, 4.0, 638.5, (float)0, 0);
+        spawns[7] = new Location(Bukkit.getWorld("Gallery"), 380.5, 4.0, 638.5, (float)0, 0);
+        spawns[8] = new Location(Bukkit.getWorld("Gallery"), 378.5, 4.0, 638.5, (float)0, 0);
+        spawns[9] = new Location(Bukkit.getWorld("Gallery"), 380.5, 4.0, 636.5, (float)0, 0);
+
+    }
 
     public static void teleportToLobby(Player p) {
 
