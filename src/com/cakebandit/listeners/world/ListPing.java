@@ -23,11 +23,11 @@ public class ListPing extends CBListener{
     public void onPing(ServerListPingEvent e) {
         if (GameState.isState(GameState.IN_LOBBY)) {
 
-            e.setMotd(GRAY + "[" + AQUA + "Cake" + BLUE + "Bandit" + GRAY + "] " + ChatColor.GREEN + "LOBBY " + ChatColor.GOLD + "- " + Game.currentMap);
+            e.setMotd(GRAY + "[" + AQUA + "Cake" + BLUE + "Bandit" + GRAY + "] " + ChatColor.GREEN + "LOBBY " + ChatColor.GOLD + "(" + ChatColor.YELLOW + Game.currentMap + ChatColor.GOLD + ")");
             
         } else if (GameState.isState(GameState.IN_GAME)) {
             
-            e.setMotd(GRAY + "[" + AQUA + "Cake" + BLUE + "Bandit" + GRAY + "] " + ChatColor.DARK_RED + "IN PROGRESS " + ChatColor.GOLD + "- " + Game.currentMap);
+            e.setMotd(GRAY + "[" + AQUA + "Cake" + BLUE + "Bandit" + GRAY + "] " + ChatColor.DARK_RED + "IN PROGRESS " + ChatColor.GOLD + "(" + ChatColor.YELLOW + Game.currentMap + ChatColor.GOLD + ")");
             
         } else if (GameState.isState(GameState.POST_GAME)) {
             

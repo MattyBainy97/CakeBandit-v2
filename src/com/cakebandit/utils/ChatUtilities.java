@@ -86,7 +86,7 @@ public class ChatUtilities {
 
             }
 
-            p.sendMessage(DARK_GRAY + "" + BOLD + "Online Players");
+            p.sendMessage(DARK_GREEN + "" + BOLD + "Online Players");
             p.sendMessage(GREEN + "ALIVE: " + GOLD + alive);
             if (!specs.equals("")) {
                 p.sendMessage(DARK_RED + "DEAD: " + GOLD + specs);
@@ -107,7 +107,7 @@ public class ChatUtilities {
 
             }
 
-            p.sendMessage(DARK_GRAY + "" + BOLD + "Online Players");
+            p.sendMessage(DARK_GREEN + "" + BOLD + "Online Players");
             p.sendMessage(GREEN + "ONLINE: " + GOLD + online);
 
         }
