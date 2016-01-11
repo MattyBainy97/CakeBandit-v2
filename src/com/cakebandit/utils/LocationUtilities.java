@@ -38,7 +38,7 @@ public class LocationUtilities {
         spawns[9] = new Location(Bukkit.getWorld("Sword"), 1667, 65, 765);
 
     }
-    
+
     public static void initializeMountTrayaSpawns() {
 
         lobby = new Location(Bukkit.getWorld("MountTraya"), 600, 52, 795);
@@ -53,19 +53,19 @@ public class LocationUtilities {
         cakes[7] = new Location(Bukkit.getWorld("MountTraya"), 598, 72, 806);
         cakes[8] = new Location(Bukkit.getWorld("MountTraya"), 612, 49, 804);
 
-        spawns[0] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 797.5, (float)180, 0);
-        spawns[1] = new Location(Bukkit.getWorld("MountTraya"), 675.5, 82.0, 797.5, (float)180, 0);
-        spawns[2] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 797.5, (float)180, 0);
-        spawns[3] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 795.5, (float)180, 0);
-        spawns[4] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 795.5, (float)180, 0);
-        spawns[5] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 793.5, (float)90, 0);
-        spawns[6] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 791.5, (float)0, 0);
-        spawns[7] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 791.5, (float)0, 0);
-        spawns[8] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 789.5, (float)0, 0);
-        spawns[9] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 789.5, (float)0, 0);
+        spawns[0] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 797.5, (float) 180, 0);
+        spawns[1] = new Location(Bukkit.getWorld("MountTraya"), 675.5, 82.0, 797.5, (float) 180, 0);
+        spawns[2] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 797.5, (float) 180, 0);
+        spawns[3] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 795.5, (float) 180, 0);
+        spawns[4] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 795.5, (float) 180, 0);
+        spawns[5] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 793.5, (float) 90, 0);
+        spawns[6] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 791.5, (float) 0, 0);
+        spawns[7] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 791.5, (float) 0, 0);
+        spawns[8] = new Location(Bukkit.getWorld("MountTraya"), 676.5, 82.0, 789.5, (float) 0, 0);
+        spawns[9] = new Location(Bukkit.getWorld("MountTraya"), 674.5, 82.0, 789.5, (float) 0, 0);
 
     }
-    
+
     public static void initializeGallerySpawns() {
 
         lobby = new Location(Bukkit.getWorld("Gallery"), 344, 4, 618);
@@ -80,16 +80,43 @@ public class LocationUtilities {
         cakes[7] = new Location(Bukkit.getWorld("Gallery"), 344, 4, 673);
         cakes[8] = new Location(Bukkit.getWorld("Gallery"), 361, 4, 651);
 
-        spawns[0] = new Location(Bukkit.getWorld("Gallery"), 382.5, 4.0, 642.5, (float)0, 0);
-        spawns[1] = new Location(Bukkit.getWorld("Gallery"), 380.5, 4.0, 642.5, (float)0, 0);
-        spawns[2] = new Location(Bukkit.getWorld("Gallery"), 378.5, 4.0, 642.5, (float)0, 0);
-        spawns[3] = new Location(Bukkit.getWorld("Gallery"), 382.5, 4.0, 640.5, (float)0, 0);
-        spawns[4] = new Location(Bukkit.getWorld("Gallery"), 380.5, 4.0, 640.5, (float)0, 0);
-        spawns[5] = new Location(Bukkit.getWorld("Gallery"), 378.5, 4.0, 640.5, (float)0, 0);
-        spawns[6] = new Location(Bukkit.getWorld("Gallery"), 382.5, 4.0, 638.5, (float)0, 0);
-        spawns[7] = new Location(Bukkit.getWorld("Gallery"), 380.5, 4.0, 638.5, (float)0, 0);
-        spawns[8] = new Location(Bukkit.getWorld("Gallery"), 378.5, 4.0, 638.5, (float)0, 0);
-        spawns[9] = new Location(Bukkit.getWorld("Gallery"), 380.5, 4.0, 636.5, (float)0, 0);
+        spawns[0] = new Location(Bukkit.getWorld("Gallery"), 382.5, 4.0, 642.5, (float) 0, 0);
+        spawns[1] = new Location(Bukkit.getWorld("Gallery"), 380.5, 4.0, 642.5, (float) 0, 0);
+        spawns[2] = new Location(Bukkit.getWorld("Gallery"), 378.5, 4.0, 642.5, (float) 0, 0);
+        spawns[3] = new Location(Bukkit.getWorld("Gallery"), 382.5, 4.0, 640.5, (float) 0, 0);
+        spawns[4] = new Location(Bukkit.getWorld("Gallery"), 380.5, 4.0, 640.5, (float) 0, 0);
+        spawns[5] = new Location(Bukkit.getWorld("Gallery"), 378.5, 4.0, 640.5, (float) 0, 0);
+        spawns[6] = new Location(Bukkit.getWorld("Gallery"), 382.5, 4.0, 638.5, (float) 0, 0);
+        spawns[7] = new Location(Bukkit.getWorld("Gallery"), 380.5, 4.0, 638.5, (float) 0, 0);
+        spawns[8] = new Location(Bukkit.getWorld("Gallery"), 378.5, 4.0, 638.5, (float) 0, 0);
+        spawns[9] = new Location(Bukkit.getWorld("Gallery"), 380.5, 4.0, 636.5, (float) 0, 0);
+
+    }
+
+    public static void initializeTerminalSpawns() {
+
+        lobby = new Location(Bukkit.getWorld("Terminal"), 54.5, 71.5, -157.5, (float) -90, 0);
+
+        cakes[0] = new Location(Bukkit.getWorld("Terminal"), 95, 71, -184);
+        cakes[1] = new Location(Bukkit.getWorld("Terminal"), 114, 71, -199);
+        cakes[2] = new Location(Bukkit.getWorld("Terminal"), 144, 71, -189);
+        cakes[3] = new Location(Bukkit.getWorld("Terminal"), 112, 71, -171);
+        cakes[4] = new Location(Bukkit.getWorld("Terminal"), 132, 71, -137);
+        cakes[5] = new Location(Bukkit.getWorld("Terminal"), 97, 72, -140);
+        cakes[6] = new Location(Bukkit.getWorld("Terminal"), 66, 66, -147);
+        cakes[7] = new Location(Bukkit.getWorld("Terminal"), 64, 75, -132);
+        cakes[8] = new Location(Bukkit.getWorld("Terminal"), 84, 71, -155);
+
+        spawns[0] = new Location(Bukkit.getWorld("Terminal"), 86.5, 71.0, 183.5, (float) -90, 0);
+        spawns[1] = new Location(Bukkit.getWorld("Terminal"), 84.5, 71.0, 183.5, (float) -90, 0);
+        spawns[2] = new Location(Bukkit.getWorld("Terminal"), 82.5, 71.0, 183.5, (float) -90, 0);
+        spawns[3] = new Location(Bukkit.getWorld("Terminal"), 76.5, 71.0, 183.5, (float) -90, 0);
+        spawns[4] = new Location(Bukkit.getWorld("Terminal"), 72.5, 71.0, 183.5, (float) -90, 0);
+        spawns[5] = new Location(Bukkit.getWorld("Terminal"), 70.5, 71.0, 183.5, (float) -90, 0);
+        spawns[6] = new Location(Bukkit.getWorld("Terminal"), 68.5, 71.0, 183.5, (float) -90, 0);
+        spawns[7] = new Location(Bukkit.getWorld("Terminal"), 66.5, 71.0, 183.5, (float) -90, 0);
+        spawns[8] = new Location(Bukkit.getWorld("Terminal"), 64.5, 71.0, 183.5, (float) -90, 0);
+        spawns[9] = new Location(Bukkit.getWorld("Terminal"), 62.5, 71.0, 183.5, (float) -90, 0);
 
     }
 

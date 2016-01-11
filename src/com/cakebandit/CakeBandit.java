@@ -74,6 +74,8 @@ public class CakeBandit extends JavaPlugin {
                 LocationUtilities.initializeMountTrayaSpawns();
             } else if (w.getName().contains("Gallery")) {
                 LocationUtilities.initializeGallerySpawns();
+            } else if (w.getName().contains("Terminal")) {
+                LocationUtilities.initializeTerminalSpawns();
             }
 
         }
