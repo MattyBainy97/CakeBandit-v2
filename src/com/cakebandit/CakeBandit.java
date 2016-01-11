@@ -70,11 +70,6 @@ public class CakeBandit extends JavaPlugin {
                 e.remove();
                 
             }
-            for (Chunk c : w.getLoadedChunks()){
-                
-                c.unload();
-                
-            }
             
             if (w.getName().contains("Sword")) {
                 LocationUtilities.initializeSwordSpawns();
