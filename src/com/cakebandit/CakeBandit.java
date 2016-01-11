@@ -32,6 +32,7 @@ import com.cakebandit.utils.ChatUtilities;
 import com.cakebandit.utils.LocationUtilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
 import org.bukkit.GameMode;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
@@ -65,17 +66,28 @@ public class CakeBandit extends JavaPlugin {
             w.setStorm(false);
             w.setWeatherDuration(9999999);
             for (Entity e : w.getEntities()) {
+                
                 e.remove();
+                
             }
-
+            for (Chunk c : w.getLoadedChunks()){
+                
+                c.unload();
+                
+            }
+            
             if (w.getName().contains("Sword")) {
                 LocationUtilities.initializeSwordSpawns();
+                Game.currentMap = "Sword Base";
             } else if (w.getName().contains("MountTraya")) {
                 LocationUtilities.initializeMountTrayaSpawns();
+                Game.currentMap = "Mount Traya";
             } else if (w.getName().contains("Gallery")) {
                 LocationUtilities.initializeGallerySpawns();
+                Game.currentMap = "The Gallery";
             } else if (w.getName().contains("Terminal")) {
                 LocationUtilities.initializeTerminalSpawns();
+                Game.currentMap = "Terminal";
             }
 
         }

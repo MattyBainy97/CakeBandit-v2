@@ -14,6 +14,8 @@ import org.bukkit.entity.Player;
 
 public class Game {
 
+    public static String currentMap = "";
+    
     private static boolean canStart = false;
     private static boolean hasStarted = false;
 
